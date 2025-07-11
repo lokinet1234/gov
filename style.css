@@ -1,3 +1,28 @@
+/* CSS Variables for Theming */
+:root {
+    --bg-color: #fff;
+    --text-color: #111;
+    --text-muted: #666;
+    --text-light-muted: #999;
+    --border-color: #f0f0f0;
+    --mark-bg: #f0f0f0;
+    --box-bg: #f8f8f8;
+    --icon-border: #e0e0e0;
+    --header-bg: rgba(255, 255, 255, 0.95);
+}
+
+.dark-mode {
+    --bg-color: #121212;
+    --text-color: #f1f1f1;
+    --text-muted: #9e9e9e;
+    --text-light-muted: #757575;
+    --border-color: #2a2a2a;
+    --mark-bg: #333;
+    --box-bg: #1e1e1e;
+    --icon-border: #444;
+    --header-bg: rgba(18, 18, 18, 0.85);
+}
+
 /* General Body & Typography */
 * {
     margin: 0;
@@ -8,15 +33,14 @@
 body {
     font-family: "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
     line-height: 1.6;
-    color: #111;
-    background: #fff;
+    color: var(--text-color);
+    background: var(--bg-color);
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
+    transition: background-color 0.3s, color 0.3s;
 }
 
-html {
-    scroll-behavior: smooth;
-}
+html { scroll-behavior: smooth; }
 
 /* Header */
 .site-header {
@@ -24,10 +48,11 @@ html {
     top: 0;
     left: 0;
     right: 0;
-    background: rgba(255, 255, 255, 0.95);
+    background: var(--header-bg);
     backdrop-filter: blur(10px);
-    border-bottom: 1px solid #f0f0f0;
+    border-bottom: 1px solid var(--border-color);
     z-index: 1000;
+    transition: background-color 0.3s, border-color 0.3s;
 }
 
 .header-content {
@@ -40,179 +65,69 @@ html {
     height: 80px;
 }
 
-.logo h1 {
-    font-size: 24px;
-    font-weight: 500;
-    letter-spacing: -0.02em;
-}
+.logo h1 { font-size: 24px; font-weight: 500; letter-spacing: -0.02em; }
+.main-nav { display: flex; align-items: center; gap: 20px; }
+.nav-links { display: flex; gap: 32px; }
+.nav-link { background: none; border: none; font-size: 16px; font-weight: 400; color: var(--text-muted); cursor: pointer; transition: color 0.2s ease; padding: 8px 0; }
+.nav-link:hover, .nav-link.active { color: var(--text-color); font-weight: 500; }
 
-.main-nav {
-    display: flex;
-    align-items: center;
-}
-
-.nav-links {
-    display: flex;
-    gap: 32px;
-}
-
-.nav-link {
+/* Theme Toggle Button */
+.theme-toggle {
     background: none;
-    border: none;
-    font-size: 16px;
-    font-weight: 400;
-    color: #666;
+    border: 1px solid var(--border-color);
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
     cursor: pointer;
-    transition: color 0.2s ease;
-    padding: 8px 0;
-}
-
-.nav-link:hover,
-.nav-link.active {
-    color: #000;
-    font-weight: 500;
-}
-
-/* Main Content */
-.main-content {
-    padding-top: 80px;
-}
-
-/* Hero Section */
-.hero-section {
-    min-height: 100vh;
     display: flex;
     align-items: center;
     justify-content: center;
-    text-align: center;
-    padding: 0 40px;
+    color: var(--text-muted);
+    transition: background-color 0.3s, color 0.3s, border-color 0.3s;
 }
-
-.hero-content {
-    max-width: 800px;
+.theme-toggle:hover {
+    color: var(--text-color);
+    background-color: var(--box-bg);
 }
+.theme-toggle .moon-icon { display: none; }
+.dark-mode .theme-toggle .sun-icon { display: none; }
+.dark-mode .theme-toggle .moon-icon { display: block; }
 
-.hero-title {
-    font-size: clamp(48px, 8vw, 96px);
-    font-weight: 400;
-    line-height: 1.1;
-    letter-spacing: -0.02em;
-    margin-bottom: 32px;
-}
-
-.hero-subtitle {
-    font-size: 20px;
-    color: #666;
-    margin-bottom: 80px;
-    font-weight: 400;
-}
-
-.scroll-indicator {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 16px;
-    color: #999;
-    font-size: 14px;
-    text-decoration: none;
-}
-
-.arrow-down {
-    font-size: 20px;
-    animation: bounce 2s infinite;
-}
-
-@keyframes bounce {
-    0%, 20%, 50%, 80%, 100% {
-        transform: translateY(0);
-    }
-    40% {
-        transform: translateY(-10px);
-    }
-    60% {
-        transform: translateY(-5px);
-    }
-}
-
-/* Content Sections */
-.content-section {
-    max-width: 1200px;
-    margin: 0 auto;
-    padding: 120px 40px;
-    border-bottom: 1px solid #f0f0f0;
-}
-
-.content-section:last-child {
-    border-bottom: none;
-}
-
-.section-header {
-    display: flex;
-    align-items: baseline;
-    gap: 32px;
-    margin-bottom: 80px;
-}
-
-.section-number {
-    font-size: 14px;
-    color: #999;
-    font-weight: 500;
-    min-width: 40px;
-}
-
-.section-header h2 {
-    font-size: clamp(32px, 5vw, 48px);
-    font-weight: 400;
-    line-height: 1.2;
-    letter-spacing: -0.02em;
-}
-
-.section-content {
-    max-width: 800px;
-    margin-left: auto;
-}
-
-.lead-paragraph {
-    font-size: 24px;
-    line-height: 1.4;
-    margin-bottom: 32px;
-    color: #333;
-}
-
-.section-content p {
-    font-size: 18px;
-    line-height: 1.6;
-    margin-bottom: 24px;
-    color: #333;
-}
-
-.legal-quote {
-    font-style: italic;
-    color: #555;
-    border-left: 3px solid #ddd;
-    padding-left: 20px;
-    margin: 32px 0;
-}
-
+/* Main Content & Sections */
+.main-content { padding-top: 80px; }
+.hero-section { min-height: 100vh; display: flex; align-items: center; justify-content: center; text-align: center; padding: 0 40px; }
+.hero-content { max-width: 800px; }
+.hero-title { font-size: clamp(48px, 8vw, 96px); font-weight: 400; line-height: 1.1; letter-spacing: -0.02em; margin-bottom: 32px; }
+.hero-subtitle { font-size: 20px; color: var(--text-muted); margin-bottom: 80px; font-weight: 400; }
+.scroll-indicator { display: flex; flex-direction: column; align-items: center; gap: 16px; color: var(--text-light-muted); font-size: 14px; text-decoration: none; }
+.arrow-down { font-size: 20px; animation: bounce 2s infinite; }
+@keyframes bounce { 0%, 20%, 50%, 80%, 100% { transform: translateY(0); } 40% { transform: translateY(-10px); } 60% { transform: translateY(-5px); } }
+.content-section { max-width: 1200px; margin: 0 auto; padding: 120px 40px; border-bottom: 1px solid var(--border-color); }
+.content-section:last-child { border-bottom: none; }
+.section-header { display: flex; align-items: baseline; gap: 32px; margin-bottom: 80px; }
+.section-number { font-size: 14px; color: var(--text-light-muted); font-weight: 500; min-width: 40px; }
+.section-header h2 { font-size: clamp(32px, 5vw, 48px); font-weight: 400; line-height: 1.2; letter-spacing: -0.02em; }
+.section-content { max-width: 800px; margin-left: auto; }
+.lead-paragraph { font-size: 24px; line-height: 1.4; margin-bottom: 32px; color: var(--text-color); }
+.section-content p { font-size: 18px; line-height: 1.6; margin-bottom: 24px; }
+.section-content mark { background: var(--mark-bg); padding: 2px 4px; border-radius: 2px; }
+.legal-note { background: var(--box-bg); padding: 24px; border-radius: 4px; margin: 32px 0; font-size: 16px; color: var(--text-muted); }
+.principle-box { background: var(--box-bg); padding: 40px; border-radius: 4px; margin: 48px 0; }
+.principle-box h4 { font-size: 20px; font-weight: 500; margin-bottom: 16px; color: var(--text-color); }
+.legal-quote { font-style: italic; color: var(--text-muted); border-left: 3px solid #ddd; padding-left: 20px; margin: 32px 0; }
+.legal-quote cite { display: block; font-style: normal; margin-top: 16px; }
+/* ... other styles from your original file like case-comparison, violations-grid, etc., will also adopt the new colors via their parent sections ... */
 
 /* Footer */
-.site-footer {
-    border-top: 1px solid #f0f0f0;
-    padding: 40px;
-    text-align: center;
-}
+.site-footer { border-top: 1px solid var(--border-color); padding: 40px; text-align: center; }
+.footer-content p { font-size: 14px; color: var(--text-light-muted); }
 
-.footer-content p {
-    font-size: 14px;
-    color: #999;
-}
-
-/* Responsive Design */
-@media (max-width: 768px) {
-    .header-content { padding: 0 20px; }
-    .nav-links { display: none; }
-    .hero-section { padding: 0 20px; }
-    .content-section { padding: 80px 20px; }
-    .section-header { flex-direction: column; align-items: flex-start; gap: 16px; }
-    .section-content { margin-left: 0; }
-}
+/* Other Visual Elements */
+.visual-section { max-width: 1200px; margin: 0 auto; padding: 80px 40px; border-bottom: 1px solid var(--border-color); }
+.concept-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 48px; }
+.concept-item { text-align: center; }
+.concept-icon { width: 80px; height: 80px; margin: 0 auto 24px; display: flex; align-items: center; justify-content: center; border: 2px solid var(--icon-border); border-radius: 50%; }
+.concept-svg { width: 40px; height: 40px; color: var(--text-muted); }
+.concept-item h4 { font-size: 18px; font-weight: 500; margin-bottom: 8px; }
+.concept-item p { font-size: 14px; color: var(--text-muted); margin: 0; }
+.case-comparison, .violations-grid, .amendment-visual { /* These will inherit new colors */ }
