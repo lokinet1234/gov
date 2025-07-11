@@ -1,80 +1,28 @@
 document.addEventListener("DOMContentLoaded", function() {
-    const navLinks = document.querySelectorAll('.nav-link');
-    const sections = document.querySelectorAll('.content-section, .hero-section'); // Include hero section for correct highlighting
-    const themeToggle = document.getElementById('theme-toggle');
-    const body = document.body;
 
-    // --- THEME TOGGLE LOGIC ---
+    // --- SCROLL-IN ANIMATION LOGIC ---
 
-    // Function to set the theme
-    const setTheme = (theme) => {
-        if (theme === 'dark') {
-            body.classList.add('dark-mode');
-            localStorage.setItem('theme', 'dark');
-        } else {
-            body.classList.remove('dark-mode');
-            localStorage.setItem('theme', 'light');
-        }
-    };
+    const sections = document.querySelectorAll('section');
 
-    // Check for saved theme in localStorage or user's OS preference
-    const savedTheme = localStorage.getItem('theme');
-    const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
-
-    if (savedTheme) {
-        setTheme(savedTheme);
-    } else if (prefersDark) {
-        setTheme('dark');
-    }
-
-    // Event listener for the toggle button
-    themeToggle.addEventListener('click', () => {
-        if (body.classList.contains('dark-mode')) {
-            setTheme('light');
-        } else {
-            setTheme('dark');
-        }
-    });
-
-
-    // --- SCROLL LOGIC ---
-
-    // Smooth scroll for navigation links
-    navLinks.forEach(link => {
-        link.addEventListener('click', function() {
-            const targetId = this.getAttribute('data-target');
-            const targetSection = document.getElementById(targetId);
-            if (targetSection) {
-                // Calculate offset for the fixed header
-                const headerOffset = 80;
-                const elementPosition = targetSection.getBoundingClientRect().top;
-                const offsetPosition = elementPosition + window.pageYOffset - headerOffset;
-      
-                window.scrollTo({
-                    top: offsetPosition,
-                    behavior: "smooth"
-                });
+    const observer = new IntersectionObserver(entries => {
+        entries.forEach(entry => {
+            // If the element is intersecting (visible)
+            if (entry.isIntersecting) {
+                // Add the 'visible' class to trigger the animation
+                entry.target.classList.add('visible');
+                // Optional: Stop observing the element once it's visible
+                observer.unobserve(entry.target);
             }
         });
+    }, {
+        // Options for the observer
+        root: null, // relative to the viewport
+        threshold: 0.1 // trigger when 10% of the element is visible
     });
 
-    // Highlight active nav link on scroll
-    window.addEventListener('scroll', function() {
-        let currentSectionId = '';
-        const offset = window.innerHeight / 3;
-
-        sections.forEach(section => {
-            const sectionTop = section.offsetTop;
-            if (window.scrollY >= sectionTop - offset) {
-                currentSectionId = section.getAttribute('id');
-            }
-        });
-
-        navLinks.forEach(link => {
-            link.classList.remove('active');
-            if (link.getAttribute('data-target') === currentSectionId) {
-                link.classList.add('active');
-            }
-        });
+    // Observe each section
+    sections.forEach(section => {
+        observer.observe(section);
     });
+
 });
