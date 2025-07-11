@@ -7,147 +7,57 @@
     <link rel="stylesheet" href="style.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Source+Serif+4:opsz,wght@8..60,400;500;600&display=swap" rel="stylesheet">
 </head>
 <body>
+    <div class="site-wrapper">
+        <div class="main-container">
+            <div class="content-column">
 
-    <!-- Header -->
-    <header class="site-header">
-        <div class="header-content">
-            <div class="logo">
-                <h1>Legal Brief</h1>
-            </div>
-            <nav class="main-nav">
-                <div class="nav-links">
-                    <button class="nav-link active" data-target="hero">Home</button>
-                    <button class="nav-link" data-target="chapter1">Chapter 1</button>
-                    <button class="nav-link" data-target="chapter1.2">1.2 Malicious Prosecution</button>
-                    <button class="nav-link" data-target="chapter1.3">1.3 Abuse of Process</button>
-                    <button class="nav-link" data-target="chapter1.4">1.4 Due Process</button>
-                    <button class="nav-link" data-target="chapter1.6">1.6 Procedural Violations</button>
+                <!-- [NEW] This block is for the centered header -->
+                <div class="centered-content-block" style="padding-top: 80px;">
+                    <header class="main-header">
+                        <h1>A Pattern of Injustice</h1>
+                        <p>An Analysis of Systemic Failure in Due Process, Prosecutorial Conduct, and Constitutional Law</p>
+                    </header>
                 </div>
-                <button id="theme-toggle" class="theme-toggle">
-                    <svg class="sun-icon" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="5"></circle><line x1="12" y1="1" x2="12" y2="3"></line><line x1="12" y1="21" x2="12" y2="23"></line><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line><line x1="1" y1="12" x2="3" y2="12"></line><line x1="21" y1="12" x2="23" y2="12"></line><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line></svg>
-                    <svg class="moon-icon" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path></svg>
-                </button>
-            </nav>
+
+                <!-- [NEW] This container holds all the main scrolling content -->
+                <div class="main-content-area">
+
+                    <section id="introduction">
+                        <h2>Introduction: Weaponized Justice</h2>
+                        <p>This case presents a clear pattern of prosecutorial misconduct and abuse of process stemming from the plaintiff’s deliberate concealment of exculpatory evidence and manipulation of legal proceedings. The defendant’s constitutional rights were systematically violated.</p>
+                        <blockquote>"Whenever any Form of Government becomes destructive of these ends, it is the Right of the People to alter or to abolish it."</blockquote>
+                    </section>
+
+                    <section id="misconduct">
+                        <h2>I. Malicious Prosecution & The Architecture of Deception</h2>
+                        <h3>1.1 Prosecutorial Misconduct and Brady Violations</h3>
+                        <p>Under <em>Brady v. Maryland</em>, the prosecution bears an absolute constitutional duty to disclose all material exculpatory evidence. The defendant’s documented prior reports of abuse by the plaintiff constitute quintessential Brady material.</p>
+                        
+                        <h3>1.2 The Half-Truth as a Lie</h3>
+                        <p>The plaintiff’s selective presentation of evidence—presenting misleading half-truths while concealing exculpatory facts—vitiates any claim of probable cause. As Prosser & Keeton note, "half of the truth may amount to a lie if it is understood to be the whole."</p>
+                    </section>
+
+                    <section id="due-process">
+                        <h2>II. The Annihilation of Due Process</h2>
+                        <p>The conduct of the hearings fell far short of providing a meaningful opportunity to be heard, creating a proceeding "totally lacking in notice."</p>
+                        <ul>
+                            <li><strong>Jurisdictional Defect:</strong> A Commissioner presided over contested matters without the required stipulation from both parties, rendering all orders void.</li>
+                            <li><strong>Violation of Notice:</strong> Plaintiff petitioned for two full trials before the defendant had any knowledge of the proceedings.</li>
+                        </ul>
+                    </section>
+
+                    <section id="first-amendment">
+                        <h2>III. The Silencing of Dissent</h2>
+                        <p>"The freedom to challenge official action without risking arrest distinguishes a free nation from a police state." To justify prohibition of speech, the state must show more than a mere desire to avoid the discomfort of an unpopular viewpoint.</p>
+                    </section>
+                
+                </div> <!-- End of main-content-area -->
+
+            </div>
         </div>
-    </header>
-
-    <!-- Main Content -->
-    <main class="main-content">
-
-        <!-- Hero Section -->
-        <section id="hero" class="hero-section">
-            <div class="hero-content">
-                <h1 class="hero-title">A Pattern of Injustice:<br>The Case for Due Process</h1>
-                <p class="hero-subtitle">An analysis of prosecutorial misconduct, malicious prosecution, and abuse of process.</p>
-                <a href="#introduction" class="scroll-indicator"><span>Read the Brief</span><div class="arrow-down">↓</div></a>
-            </div>
-        </section>
-
-        <!-- Chapter 1 Introduction -->
-        <section id="introduction" class="content-section">
-            <div class="section-header"><h2>Chapter 1: Introduction</h2></div>
-            <div class="section-content">
-                <p class="lead-paragraph">This case presents a clear pattern of prosecutorial misconduct, malicious prosecution, and abuse of process stemming from the plaintiff’s deliberate concealment of exculpatory evidence and manipulation of legal proceedings.</p>
-                <p>The defendant’s constitutional rights—under both federal and California law—were systematically violated through a calculated campaign of misrepresentation that perverted the justice system for personal gain.</p>
-                <div class="legal-note">
-                    <strong>Context: The California Family Law Act of 1970</strong>
-                    <p>This act abandoned a fault-based divorce regime to eliminate perjury and adversarial fault-finding. The very adversarial, fault-seeking tactics now used by the plaintiff mirror the disfavored practices the 1970 reforms sought to eradicate.</p>
-                </div>
-            </div>
-        </section>
-
-        <!-- Section 1.1 -->
-        <section id="chapter1" class="content-section">
-            <div class="section-header"><span class="section-number">1.1</span><h2>Prosecutorial Misconduct and Brady Violations</h2></div>
-            <div class="section-content">
-                <div class="principle-box">
-                    <h4>Legal Framework</h4>
-                    <p>Under <em>Brady v. Maryland</em>, the prosecution bears an absolute constitutional duty to disclose all material exculpatory evidence to the defense, regardless of whether it is specifically requested. This obligation extends to any evidence that tends to establish the defendant’s innocence, supports a defense, or impeaches the credibility of key prosecution witnesses.</p>
-                </div>
-                <h4>Application to Present Case</h4>
-                <p>The defendant’s documented prior reports of abuse by the plaintiff constitute quintessential Brady material. This evidence is material because it provides an alternative causation for the events, undermines plaintiff credibility, and directly supports affirmative defenses such as self-defense.</p>
-                <div class="citations">
-                    <p><strong>Authorities:</strong> <em>Brady v. Maryland</em> (1963) 373 U.S. 83; <em>People v. Harrison</em> (2017); <em>People v. Kasim</em> (1997); <em>People v. Pettie</em> (2017); <em>Duncan v. Ornoski</em> (2008).</p>
-                </div>
-            </div>
-        </section>
-
-        <!-- Section 1.2 -->
-        <section id="chapter1.2" class="content-section">
-            <div class="section-header"><span class="section-number">1.2</span><h2>Malicious Prosecution</h2></div>
-            <div class="section-content">
-                 <p>A successful malicious prosecution claim requires proof of: (1) favorable termination of the prior proceeding, (2) absence of probable cause, (3) malice, and (4) damages.</p>
-                <h4>Lack of Probable Cause & Demonstration of Malice</h4>
-                <p>The plaintiff’s selective presentation of evidence—cherry-picking text messages while deliberately concealing the defendant’s documented abuse reports—fundamentally undermines any claim of probable cause. Malice is evident through this calculated pattern of deception, mischaracterization of normal communication as harassment, and strategic timing of legal actions to maximize prejudice.</p>
-                 <div class="citations">
-                    <p><strong>Authorities:</strong> <em>Franklin Mint Co. v. Manatt, Phelps & Phillips, LLP</em> (2010); <em>Smith v. Liverpool & London & Globe Ins. Co.</em> (1895); <em>Casa Herrera, Inc. v. Beydoun</em> (2004).</p>
-                </div>
-            </div>
-        </section>
-        
-        <!-- Section 1.3 -->
-        <section id="chapter1.3" class="content-section">
-            <div class="section-header"><span class="section-number">1.3</span><h2>Abuse of Process</h2></div>
-            <div class="section-content">
-                <p>Abuse of process occurs when legal proceedings are perverted to serve an ulterior or improper purpose, even when the initial filing was facially lawful. The essence of this tort lies in the misuse of legal process for illegitimate ends.</p>
-                <div class="principle-box">
-                    <h4>Plaintiff’s Ulterior Motives</h4>
-                    <p>The evidence demonstrates that the plaintiff’s true objective was not legitimate protection but rather securing the defendant’s arrest as a form of retaliation, gaining strategic advantage in related disputes, and weaponizing the protective order to chill the defendant’s access to court.</p>
-                </div>
-                <div class="citations">
-                     <p><strong>Authorities:</strong> <em>Loomis v. Murphy</em> (1990) 218 Cal.App.3d 1149; <em>S.A. v. Maiden</em> (2014) 229 Cal.App.4th 27; <em>Maleti v. Wickers</em> (2022).</p>
-                </div>
-            </div>
-        </section>
-
-        <!-- Section 1.4 -->
-        <section id="chapter1.4" class="content-section">
-            <div class="section-header"><span class="section-number">1.4</span><h2>Due Process and Free Speech Violations</h2></div>
-            <div class="section-content">
-                <p>Article 1, Section 2(a) of the California Constitution provides: "Every person may freely speak, write and publish his or her sentiments on all subjects, being responsible for the abuse of this right. A law may not restrain or abridge liberty of speech or press."</p>
-                <blockquote class="legal-quote">As Justice Blackmun’s dissent in <em>Feiner v. New York</em> emphasizes, police officers may not silence a speaker simply because they “ask,” “tell,” or “command” him to stop. A lawful speaker must be given courtesy and an explanation of any order to cease.</blockquote>
-                <p>The prosecution’s reliance on one-sided evidence and failure to investigate the defendant’s prior abuse reports constitutes a violation of due process under the Fourteenth Amendment.</p>
-                 <div class="citations">
-                     <p><strong>Authorities:</strong> <em>Johnson v. Contra Costa County Clerk Recorder</em> (2021); <em>Hernandez v. City of Napa</em> (2011).</p>
-                </div>
-            </div>
-        </section>
-        
-        <!-- Section 1.6 -->
-        <section id="chapter1.6" class="content-section">
-            <div class="section-header"><span class="section-number">1.6</span><h2>Specific Procedural Violations</h2></div>
-            <div class="section-content">
-                <p>The plaintiff’s conduct demonstrates a systematic pattern of procedural violations designed to deny the defendant fundamental due process rights.</p>
-                <div class="violations-grid">
-                    <div class="violation-item"><h4>Violation of Notice Rights</h4><p>Plaintiff petitioned for two full trials before defendant had any knowledge of proceedings, violating the fundamental right to notice and opportunity to be heard.</p></div>
-                    <div class="violation-item"><h4>Evasion of Service</h4><p>Despite defendant’s six-month good-faith effort to resolve disputes, plaintiff ignored all attempts, failing to exercise reasonable diligence in service.</p></div>
-                    <div class="violation-item"><h4>Improper Evidence</h4><p>Plaintiff introduced 300 new pieces of evidence at the third trial without notice or leave of court, violating rules of civil procedure.</p></div>
-                    <div class="violation-item"><h4>Denial of Hearing</h4><p>The avalanche of evidence forced in-camera review, denying direct communication and violating procedural fairness.</p></div>
-                </div>
-            </div>
-        </section>
-        
-        <!-- Conclusion -->
-         <section id="conclusion" class="content-section">
-            <div class="section-header"><h2>Conclusion</h2></div>
-            <div class="section-content">
-                <p class="lead-paragraph">The plaintiff’s systematic concealment of exculpatory evidence, misrepresentation of communications, misuse of protective-order proceedings, and deprivation of notice and hearing violate federal and California constitutional rights.</p>
-                <p>These measures subvert due process and resurrect adversarial fault-finding contrary to the 1970 no-fault reforms. Remedies are required to correct this injustice and deter the transformation of legal protections into weapons against lawful speakers and litigants.</p>
-            </div>
-        </section>
-
-    </main>
-
-    <!-- Footer -->
-    <footer class="site-footer">
-        <div class="footer-content">
-            <p>© 2025 Legal Brief. All rights reserved.</p>
-        </div>
-    </footer>
-
-    <script src="script.js"></script>
+    </div>
 </body>
 </html>
