@@ -4,345 +4,144 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>A Pattern of Injustice: The Case for Due Process</title>
-    
-    <!-- Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;700&family=Source+Serif+4:ital,opsz,wght@0,8..60,400;0,8..60,600;1,8..60,400&display=swap" rel="stylesheet">
 
     <!-- All CSS is embedded here -->
     <style>
-        /* --- General Body & Typography --- */
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-
         :root {
-            --background-color: #fff;
-            --text-color: #111;
-            --secondary-text-color: #666;
-            --border-color: #f0f0f0;
-            --accent-bg-color: #f8f8f8;
-            --header-bg-color: rgba(255, 255, 255, 0.95);
+            --background-color: #f8f9fa;
+            --text-color: #212529;
+            --secondary-text-color: #6c757d;
+            --border-color: #dee2e6;
+            --header-bg-color: rgba(248, 249, 250, 0.85);
+            --quote-border-color: #007bff;
         }
 
         body.dark-mode {
             --background-color: #121212;
-            --text-color: #f1f1f1;
-            --secondary-text-color: #aaa;
-            --border-color: #2a2a2a;
-            --accent-bg-color: #1e1e1e;
-            --header-bg-color: rgba(18, 18, 18, 0.9);
+            --text-color: #e9ecef;
+            --secondary-text-color: #adb5bd;
+            --border-color: #343a40;
+            --header-bg-color: rgba(18, 18, 18, 0.85);
+            --quote-border-color: #4dabf7;
         }
-
+        
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        html { scroll-behavior: smooth; }
         body {
             font-family: "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
-            line-height: 1.6;
+            line-height: 1.8;
             background-color: var(--background-color);
             color: var(--text-color);
             transition: background-color 0.3s, color 0.3s;
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
         }
 
-        html {
-            scroll-behavior: smooth;
-        }
+        .site-wrapper { display: flex; justify-content: center; padding: 4rem 2rem; }
+        .main-container { max-width: 1440px; width: 100%; display: flex; justify-content: center; }
+        .content-column { display: flex; flex-direction: column; align-items: center; width: 100%; max-width: 800px; }
 
-        /* --- Header & Dark Mode Toggle --- */
-        .site-header {
-            position: fixed;
-            top: 0;
-            left: 0;
-            right: 0;
-            background-color: var(--header-bg-color);
-            -webkit-backdrop-filter: blur(10px);
-            backdrop-filter: blur(10px);
-            border-bottom: 1px solid var(--border-color);
-            z-index: 1000;
-        }
+        .main-header { width: 100%; text-align: center; padding-bottom: 2rem; border-bottom: 1px solid var(--border-color); margin-bottom: 3rem; }
+        .main-header h1 { font-family: 'Source Serif 4', serif; font-size: 3rem; font-weight: 600; }
+        .main-header p { font-size: 1.1rem; color: var(--secondary-text-color); margin-top: 0.5rem; }
 
-        .header-content {
-            max-width: 1400px;
-            margin: 0 auto;
-            padding: 0 40px;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            height: 80px;
-        }
-
-        .logo h1 { font-size: 24px; font-weight: 500; letter-spacing: -0.02em; }
-        .main-nav { display: flex; align-items: center; gap: 24px; }
-        .nav-links { display: flex; gap: 32px; }
-
-        .nav-link {
-            background: none; border: none; font-size: 16px;
-            font-weight: 400; color: var(--secondary-text-color); cursor: pointer;
-            transition: color 0.2s ease; padding: 8px 0;
-        }
-        .nav-link:hover, .nav-link.active { color: var(--text-color); font-weight: 500; }
-
-        .dark-mode-toggle { display: flex; align-items: center; cursor: pointer; }
-        .toggle-track { width: 44px; height: 24px; background-color: #ccc; border-radius: 12px; position: relative; transition: background-color 0.3s; }
-        .toggle-thumb { width: 20px; height: 20px; background-color: white; border-radius: 50%; position: absolute; top: 2px; left: 2px; transition: transform 0.3s; }
-        body.dark-mode .toggle-track { background-color: #444; }
-        body.dark-mode .toggle-thumb { transform: translateX(20px); }
-
-        /* --- Main Content & Sections --- */
-        .main-content { padding-top: 80px; }
-        .hero-section { min-height: 100vh; display: flex; align-items: center; justify-content: center; text-align: center; padding: 0 40px; }
-        .hero-content { max-width: 800px; }
-        .hero-title { font-size: clamp(48px, 8vw, 96px); font-weight: 400; line-height: 1.1; letter-spacing: -0.02em; margin-bottom: 32px; }
-        .hero-subtitle { font-size: 20px; color: var(--secondary-text-color); margin-bottom: 80px; font-weight: 400; }
-
-        .scroll-indicator { display: flex; flex-direction: column; align-items: center; gap: 16px; color: #999; font-size: 14px; text-decoration: none; }
-        .arrow-down { font-size: 20px; animation: bounce 2s infinite; }
-        @keyframes bounce { 0%, 20%, 50%, 80%, 100% { transform: translateY(0); } 40% { transform: translateY(-10px); } 60% { transform: translateY(-5px); } }
-
-        .content-section { max-width: 1200px; margin: 0 auto; padding: 120px 40px; border-bottom: 1px solid var(--border-color); }
-        .content-section:last-child { border-bottom: none; }
-
-        .section-header { display: flex; align-items: baseline; gap: 32px; margin-bottom: 80px; }
-        .section-number { font-size: 14px; color: var(--secondary-text-color); font-weight: 500; min-width: 40px; }
-        .section-header h2 { font-size: clamp(32px, 5vw, 48px); font-weight: 400; line-height: 1.2; letter-spacing: -0.02em; }
-
-        .section-content { max-width: 800px; margin-left: auto; }
-        .lead-paragraph { font-size: 24px; line-height: 1.4; margin-bottom: 32px; }
-        .section-content p { font-size: 18px; line-height: 1.6; margin-bottom: 24px; }
-        .legal-quote { font-style: italic; color: var(--secondary-text-color); border-left: 3px solid #ddd; padding-left: 20px; margin: 32px 0; }
-        body.dark-mode .legal-quote { border-left-color: #444; }
-        .legal-quote cite { display: block; font-style: normal; margin-top: 8px; font-size: 0.9em; }
-
-        /* --- Detailed Content Blocks --- */
-        .visual-section { padding: 80px 40px; max-width: 1200px; margin: 0 auto; border-bottom: 1px solid var(--border-color); }
-        .concept-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 48px; }
-        .concept-item { text-align: center; }
-        .concept-item h4 { font-size: 18px; font-weight: 500; margin-bottom: 8px; }
-        .concept-item p { font-size: 14px; color: var(--secondary-text-color); margin: 0; }
-        .concept-icon { width: 80px; height: 80px; margin: 0 auto 24px; display: flex; align-items: center; justify-content: center; border: 2px solid #e0e0e0; border-radius: 50%; background: linear-gradient(135deg, #f0f0f0 0%, #e0e0e0 100%); }
-        .concept-svg { width: 40px; height: 40px; color: #666; }
-        body.dark-mode .concept-icon { border-color: #444; background: linear-gradient(135deg, #2a2a2a 0%, #1e1e1e 100%); }
-        body.dark-mode .concept-svg { color: #aaa; }
-
-        .legal-note { background: var(--accent-bg-color); padding: 24px; border-radius: 4px; margin: 32px 0; font-size: 16px; }
-        .principle-box { background: var(--accent-bg-color); padding: 40px; border-radius: 4px; margin: 48px 0; }
-        .principle-box h4 { font-size: 20px; font-weight: 500; margin-bottom: 16px; }
-
-        .case-comparison { display: grid; grid-template-columns: 1fr 1fr; gap: 48px; margin: 48px 0; }
-        .opinion { padding: 32px; border-radius: 4px; }
-        .opinion h4 { font-size: 18px; font-weight: 500; margin-bottom: 16px; }
-        .opinion p { font-size: 16px; margin: 0; color: var(--secondary-text-color); }
-        .opinion.majority { background-color: var(--accent-bg-color); }
-        .opinion.dissent { background-color: #e9ecef; }
-        body.dark-mode .opinion.dissent { background-color: #343a40; }
+        section { width: 100%; margin-bottom: 4rem; }
+        section h2 { font-family: 'Source Serif 4', serif; font-size: 2rem; font-weight: 600; margin-bottom: 1.5rem; }
+        section h3 { font-family: 'Source Serif 4', serif; font-size: 1.5rem; font-weight: 600; margin-top: 2.5rem; margin-bottom: 1rem; }
+        section p { font-size: 1.1rem; margin-bottom: 1.5rem; color: var(--secondary-text-color); }
+        blockquote { border-left: 3px solid var(--quote-border-color); padding-left: 1.5rem; margin: 2rem 0; font-style: italic; color: var(--text-color); }
+        blockquote cite { display: block; font-style: normal; margin-top: 1rem; font-size: 0.9em; color: var(--secondary-text-color); }
         
-        .citations { margin-top: 24px; }
-        .citations a { font-size: 14px; color: var(--secondary-text-color); text-decoration: none; }
-        .citations a:hover { text-decoration: underline; color: var(--text-color); }
+        .case-cite { display: block; font-family: monospace; font-size: 14px; color: #888; margin-top: -1rem; margin-bottom: 1.5rem; }
+        body.dark-mode .case-cite { color: #666; }
 
-        .violations-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 32px; margin: 48px 0; }
-        .violation-item { padding: 32px; background: var(--accent-bg-color); border-radius: 4px; }
-        .violation-item h4 { font-size: 18px; font-weight: 500; margin-bottom: 12px; }
-        .violation-item p { font-size: 16px; color: var(--secondary-text-color); margin: 0; }
-
-        .amendment-visual { margin: 48px 0; padding: 48px; background: var(--accent-bg-color); border-radius: 4px; text-align: center; }
-        .amendment-visual h4 { font-size: 20px; font-weight: 500; }
-        .amendment-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 32px; margin-top: 32px; }
-        .amendment-item { padding: 24px; border-radius: 4px; border: 1px solid #e0e0e0; background: #f8f9fa; }
-        .amendment-number { font-size: 48px; font-weight: 300; line-height: 1; margin-bottom: 8px; }
-        .amendment-title { font-size: 14px; font-weight: 600; margin-bottom: 8px; }
-        .amendment-description { font-size: 12px; color: var(--secondary-text-color); line-height: 1.4; }
-        body.dark-mode .amendment-item { border-color: #444; background: #2a2a2a; }
-
-        /* --- SCROLL-IN ANIMATION STYLES --- */
-        section {
-            opacity: 0;
-            transform: translateY(40px);
-            transition: opacity 0.8s ease-out, transform 0.8s ease-out;
-        }
-        section.visible {
-            opacity: 1;
-            transform: translateY(0);
-        }
-
-        /* --- Footer --- */
-        .site-footer { border-top: 1px solid var(--border-color); padding: 40px; text-align: center; }
-        .footer-content p { font-size: 14px; color: #999; }
-
-        /* --- Responsive Design --- */
         @media (max-width: 768px) {
-            .header-content { padding: 0 20px; }
-            .nav-links, .dark-mode-toggle { display: none; }
-            .content-section, .visual-section { padding: 80px 20px; }
-            .case-comparison { grid-template-columns: 1fr; }
+            .site-wrapper { padding: 2rem 1rem; }
+            .main-header h1 { font-size: 2.5rem; }
+            section h2 { font-size: 1.75rem; }
         }
     </style>
 </head>
 <body>
 
-    <!-- Header -->
-    <header class="site-header">
-        <div class="header-content">
-            <div class="logo">
-                <h1>Legal Brief</h1>
+    <div class="site-wrapper">
+        <div class="main-container">
+            <div class="content-column">
+
+                <header class="main-header">
+                    <h1>A Pattern of Injustice</h1>
+                    <p>The Case for Due Process</p>
+                </header>
+
+                <section id="introduction">
+                    <h2>Introduction: The Erasure of Uniqueness</h2>
+                    <p>This work examines the fundamental tension between human uniqueness and legal adjudication. It argues that legal systems do not merely struggle with human uniqueness as an incidental challenge, but systematically erase it as a foundational feature of legal reasoning. Through analysis of courtroom dynamics, jury decision-making, and testimonial practices, this study reveals how law transforms the irreducible complexity of lived experience into standardized "juridical facts" that serve institutional needs while potentially undermining justice for marginalized and non-normative individuals.</p>
+                    <blockquote class="legal-quote">
+                        "All are equal, endowed with certain unalienable Rights, that among these are Life, Liberty and the pursuit of Happiness. That to secure these rights, Governments are instituted among Men, deriving their just powers from the consent of the governed, That whenever any Form of Government becomes destructive of these ends, it is the Right of the People to alter or to abolish it."
+                    </blockquote>
+                    <p>The "main purpose of all the three last amendments was the freedom of the African race, the security and perpetuation of that freedom, and their protection from the oppressions of the white men who had formerly held them in slavery." This original intent contrasts sharply with modern applications where legal instruments are turned against the very people they were meant to protect.</p>
+                </section>
+
+                <section id="misconduct">
+                    <h2>I. Misconduct & Weaponized Orders</h2>
+                    <p>Orders of protection can be a shield for victims of threats and violence. But, when the order is procured through false and exaggerated testimony, it is weaponized into a sword that scars a former spouse unjustly and requires a court to fashion a remedial order that shields the newly-victimized parent from its impact.</p>
+                    <span class="case-cite">People v. Kearns, 95 NY2d 816 (2000)</span>
+
+                    <h3>The Duty to Disclose</h3>
+                    <p>The prosecutor's role is not simply to win but to see "that justice shall be done." This is frustrated by tactics aimed at securing a favorable outcome at any cost by concealing evidence that could exonerate the accused or impeach the accuser's credibility. This constitutional duty to disclose all material exculpatory evidence is a cornerstone of a fair trial.</p>
+                    <span class="case-cite">Brady v. Maryland, 373 U.S. 83 (1963)</span>
+
+                    <h3>Moral Turpitude and Credibility</h3>
+                    <p>“Moral turpitude” may be inferred not only from violent acts but also from a sustained pattern of deceitful or malicious behavior—such as filing false claims, manipulating institutions, or using legal processes for retaliation. Domestic violence is recognized as such a crime, as are offenses involving threats of violence or restraint of liberty—elements that inherently reflect moral laxity.</p>
+                    <span class="case-cite">People v. Castro, 1985</span>
+                </section>
+
+                <section id="abuse-of-process">
+                    <h2>II. Abuse of Process & Deception</h2>
+                    <p>A claim for malicious prosecution arises when legal action is initiated for an improper purpose and without a reasonable basis. The plaintiff's selective presentation of evidence—cherry-picking communications while concealing exculpatory facts—vitiates any claim of probable cause.</p>
+                    <blockquote>
+                        "Half of the truth may amount to a lie if it is understood to be the whole."
+                        <cite>Prosser & Keeton, The Law of Torts (5th ed. 1984)</cite>
+                    </blockquote>
+                    
+                    <h3>Forum Shopping</h3>
+                    <p>Forum non conveniens serves as a brake on the tendency of some plaintiffs to shop for the 'best' jurisdiction. Seeking relief in a new county immediately after receiving a negative ruling in another court is strong evidence of improper forum shopping, intended to escape judicial scrutiny.</p>
+                    <span class="case-cite">Kinney Sys., Inc. v. Cont'l Ins. Co., 674 So. 2d 86 (Fla. 1996)</span>
+                </section>
+
+                <section id="due-process">
+                    <h2>III. Due Process & Jurisdictional Defects</h2>
+                    <h3>Lack of Stipulation</h3>
+                    <p>Furthermore, the judicial officer presiding over the matter was a Commissioner. At no point did the Commissioner seek, nor did I provide, a stipulation allowing them to act as a temporary judge pursuant to California Rules of Court, rule 2.831 and Code of Civil Procedure § 259(d). In California, both parties must affirmatively stipulate for a Commissioner to act as a judge pro tempore in any contested matter. Without my consent, the Commissioner lacked jurisdiction to render a binding decision.</p>
+                    <span class="case-cite">People v. Berch (2018) 24 Cal.App.5th 1105</span>
+
+                    <h3>The Right to a Meaningful Hearing</h3>
+                    <p>Although self-represented pleadings are liberally construed, conclusory and vague allegations will not support a cause of action. Petitions relying on general comments without dates, times, or places are insufficient. When material facts were disputed, the court made no inquiry whatsoever as to the basis for objections. It is not possible that the court could reasonably have made any credibility determinations or resolved the material factual disputes based solely on the pleadings alone.</p>
+                    <span class="case-cite">Haines v. Kerner, 404 U.S. 519 (1972)</span>
+                    <span class="case-cite">J.R. v. B.M.R. Supreme Court, Monroe County, May 9, 2019</span>
+                </section>
+
+                <section id="critical-theory">
+                    <h2>IV. Critical Theory: Epistemic Exploitation & The Silencing of Dissent</h2>
+                    <p class="lead-paragraph">Women and men of today are still being called upon to stretch across the gap of male ignorance and to educate men as to our existence and our needs. This is an old and primary tool of all oppressors to keep the oppressed occupied with “the master's” concerns. Because it involves a “diversion of energies,” epistemic exploitation comes with opportunity costs.</p>
+                    
+                    <h3>The Burden of Constructive Solutions</h3>
+                    <p>Providing educational labor to one's oppressors is not only pointless but destructive when it leaves the victim worse off. As a victim, I have not been permitted to simply experience pain or express anger about the violence inflicted. Instead I must produce constructive solutions. The presumption is that if I cannot produce ways to change the system I have been forced to respond to, then I have no legal or moral right to critique the abuses against me. This reinforces the perpetrator's false narrative and confirms vengeful stereotypes when I educate others about injustice and oppression.</p>
+                    
+                    <blockquote>
+                        "In the realm of religious faith, and in that of political belief, sharp differences arise... But the people of this nation have ordained in the light of history, that, in spite of the probability of excesses and abuses, these liberties are, in the long view, essential to enlightened opinion and right conduct on the part of the citizens of a democracy."
+                    </blockquote>
+
+                    <h3>Default Skepticism as Exploitation</h3>
+                    <p>A marginalized person who fails to respond to a privileged person's conceptually confused skepticism when it is inaccurately framed as a substantive objection risks being seen as losing the debate. This leads to further loss of credibility. Default skepticism functions as a mechanism of epistemic exploitation because it creates the tacit demand for a response, requiring further cognitive and emotional labor. It is both a response to labor produced under epistemic exploitation and a demand for even more labor, enacting exploitation through a process of recursion.</p>
+                </section>
+
             </div>
-            <nav class="main-nav">
-                <div class="nav-links">
-                    <button class="nav-link active" data-target="hero">Home</button>
-                    <button class="nav-link" data-target="introduction">Introduction</button>
-                    <button class="nav-link" data-target="misconduct">Misconduct</button>
-                    <button class="nav-link" data-target="malicious-prosecution">Prosecution</button>
-                    <button class="nav-link" data-target="case-study">Case Study</button>
-                    <button class="nav-link" data-target="violations">Violations</button>
-                </div>
-                <!-- Dark Mode Toggle HTML -->
-                <div class="dark-mode-toggle" title="Toggle Dark/Light Mode">
-                    <div class="toggle-track">
-                        <div class="toggle-thumb"></div>
-                    </div>
-                </div>
-            </nav>
         </div>
-    </header>
+    </div>
 
-    <!-- Main Content -->
-    <main class="main-content">
-
-        <!-- Hero Section -->
-        <section id="hero" class="hero-section">
-            <div class="hero-content">
-                <h1 class="hero-title">A Pattern of Injustice:<br>The Case for Due Process</h1>
-                <p class="hero-subtitle">Constitutional violations through calculated misrepresentation.</p>
-                <a href="#introduction" class="scroll-indicator">
-                    <span>See legal arguments</span>
-                    <div class="arrow-down">↓</div>
-                </a>
-            </div>
-        </section>
-
-        <!-- Visual Introduction -->
-        <section class="visual-section">
-             <div class="concept-grid">
-                <div class="concept-item"><div class="concept-icon"><svg viewBox="0 0 100 100" class="concept-svg"><rect x="20" y="15" width="60" height="70" fill="none" stroke="currentColor" strokeWidth="2" /><line x1="30" y1="25" x2="70" y2="25" stroke="currentColor" strokeWidth="1" /><line x1="30" y1="35" x2="70" y2="35" stroke="currentColor" strokeWidth="1" /><line x1="30" y1="45" x2="60" y2="45" stroke="currentColor" strokeWidth="1" /><circle cx="50" cy="65" r="8" fill="none" stroke="currentColor" strokeWidth="2" /></svg></div><h4>Constitutional Rights</h4><p>Due Process & Free Speech</p></div>
-                <div class="concept-item"><div class="concept-icon"><svg viewBox="0 0 100 100" class="concept-svg"><rect x="25" y="20" width="50" height="60" fill="none" stroke="currentColor" strokeWidth="2" /><line x1="35" y1="35" x2="65" y2="35" stroke="currentColor" strokeWidth="1" /><line x1="35" y1="45" x2="65" y2="45" stroke="currentColor" strokeWidth="1" /><line x1="35" y1="55" x2="55" y2="55" stroke="currentColor" strokeWidth="1" /><path d="M60 50 L70 60 L85 45" fill="none" stroke="currentColor" strokeWidth="2" /></svg></div><h4>Evidence Concealment</h4><p>Brady Violations</p></div>
-                <div class="concept-item"><div class="concept-icon"><svg viewBox="0 0 100 100" class="concept-svg"><circle cx="50" cy="50" r="30" fill="none" stroke="currentColor" strokeWidth="2" /><line x1="35" y1="45" x2="65" y2="45" stroke="currentColor" strokeWidth="2" /><line x1="40" y1="55" x2="60" y2="55" stroke="currentColor" strokeWidth="1" /><rect x="47" y="20" width="6" height="15" fill="currentColor" /></svg></div><h4>Scales of Justice</h4><p>Malicious Prosecution</p></div>
-            </div>
-        </section>
-
-        <!-- Introduction -->
-        <section id="introduction" class="content-section">
-            <div class="section-header"><h2>Introduction</h2></div>
-            <div class="section-content"><p class="lead-paragraph">This case presents a clear pattern of malicious prosecution and abuse of process, stemming from the plaintiff's deliberate manipulation of legal proceedings.</p><p>The defendant's constitutional rights have been systematically violated through a <mark>calculated campaign of misrepresentation</mark> that perverts the justice system for personal gain.</p><div class="legal-note"><strong>Note:</strong> The term "Kafkaesque" refers to a situation marked by surreal complexity and bureaucratic irrationality.</div></div>
-        </section>
-
-        <!-- Misconduct -->
-        <section id="misconduct" class="content-section">
-            <div class="section-header"><span class="section-number">01</span><h2>Misconduct & Concealment of Evidence</h2></div>
-            <div class="section-content"><p>A prosecutor's constitutional duty is to disclose all material exculpatory evidence. This is not merely a procedural formality but a cornerstone of a fair trial.</p><div class="principle-box"><h4>Core Principle: The Duty to Disclose</h4><p>The prosecution's role is not simply to win but to see "that justice shall be done."</p></div><div class="citations"><a href="https://supreme.justia.com/cases/federal/us/373/83/" target="_blank">Brady v. Maryland (1963)</a></div></div>
-        </section>
-
-        <!-- Malicious Prosecution -->
-        <section id="malicious-prosecution" class="content-section">
-            <div class="section-header"><span class="section-number">02</span><h2>Malicious Prosecution</h2></div>
-            <div class="section-content"><p>A claim for malicious prosecution arises when legal action is initiated for an improper purpose and without a reasonable basis.</p><blockquote class="legal-quote">"Half of the truth may amount to a lie if it is understood to be the whole."<cite>— Prosser & Keeton</cite></blockquote></div>
-        </section>
-
-        <!-- Case Study -->
-        <section id="case-study" class="content-section">
-            <div class="section-header"><span class="section-number">03</span><h2>Case Study: Feiner v. New York</h2></div>
-            <div class="section-content"><p class="lead-paragraph">A central issue is whether speech can be curtailed due to a hostile reaction from listeners. This case established the "heckler's veto" doctrine.</p><div class="case-comparison"><div class="opinion majority"><h4>Majority Opinion</h4><p>Feiner was arrested not for his speech, but for the dangerous reaction it engendered.</p></div><div class="opinion dissent"><h4>Dissenting Opinion</h4><p>Police must first protect the speaker's right to talk, even from a hostile crowd.</p></div></div></div>
-        </section>
-
-        <!-- Procedural Violations -->
-        <section id="violations" class="content-section">
-            <div class="section-header"><span class="section-number">04</span><h2>Procedural Violations</h2></div>
-            <div class="section-content"><p>The plaintiff's conduct demonstrates a systematic pattern of procedural abuse designed to deny fundamental rights.</p><div class="violations-grid"><div class="violation-item"><h4>Notice Rights</h4><p>Hearings initiated without proper notice.</p></div><div class="violation-item"><h4>Vague Allegations</h4><p>Petition relied on general comments without specifics.</p></div><div class="violation-item"><h4>Meaningful Hearing</h4><p>Court failed to inquire into disputed facts.</p></div></div><div class="amendment-visual"><h4>Constitutional Foundations</h4><div class="amendment-grid"><div class="amendment-item"><div class="amendment-number">I</div><div class="amendment-title">First Amendment</div><div class="amendment-description">Freedom of speech</div></div><div class="amendment-item"><div class="amendment-number">XIV</div><div class="amendment-title">Fourteenth Amendment</div><div class="amendment-description">Due process</div></div><div class="amendment-item"><div class="amendment-number">V</div><div class="amendment-title">Fifth Amendment</div><div class="amendment-description">Self-incrimination</div></div></div></div></div>
-        </section>
-    </main>
-
-    <!-- Footer -->
-    <footer class="site-footer">
-        <div class="footer-content">
-            <p>© 2025 Legal Brief. All rights reserved.</p>
-        </div>
-    </footer>
-
-    <!-- All JavaScript is embedded here -->
-    <script>
-        document.addEventListener("DOMContentLoaded", function() {
-
-            // --- SMOOTH SCROLL & ACTIVE LINK LOGIC ---
-            const navLinks = document.querySelectorAll('.nav-link');
-            const contentSections = document.querySelectorAll('section[id]');
-
-            navLinks.forEach(link => {
-                link.addEventListener('click', function(e) {
-                    e.preventDefault();
-                    const targetId = this.getAttribute('data-target');
-                    const targetSection = document.getElementById(targetId);
-                    if (targetSection) {
-                        window.scrollTo({
-                            top: targetSection.offsetTop - 80, // Adjust for fixed header
-                            behavior: 'smooth'
-                        });
-                    }
-                });
-            });
-
-            window.addEventListener('scroll', function() {
-                let currentSectionId = 'hero';
-                const offset = window.innerHeight / 2;
-
-                contentSections.forEach(section => {
-                    if (section.id !== 'hero' && window.scrollY >= section.offsetTop - offset) {
-                        currentSectionId = section.getAttribute('id');
-                    }
-                });
-                
-                navLinks.forEach(link => {
-                    link.classList.remove('active');
-                    if (link.getAttribute('data-target') === currentSectionId) {
-                        link.classList.add('active');
-                    }
-                });
-            });
-
-            // --- DARK/LIGHT MODE TOGGLE LOGIC ---
-            const toggle = document.querySelector('.dark-mode-toggle');
-            if (localStorage.getItem('theme') === 'dark') {
-                document.body.classList.add('dark-mode');
-            }
-            toggle.addEventListener('click', function() {
-                document.body.classList.toggle('dark-mode');
-                if (document.body.classList.contains('dark-mode')) {
-                    localStorage.setItem('theme', 'dark');
-                } else {
-                    localStorage.removeItem('theme');
-                }
-            });
-
-            // --- SCROLL-IN ANIMATION LOGIC ---
-            const animatedSections = document.querySelectorAll('section');
-            const observer = new IntersectionObserver(entries => {
-                entries.forEach(entry => {
-                    if (entry.isIntersecting) {
-                        entry.target.classList.add('visible');
-                        observer.unobserve(entry.target);
-                    }
-                });
-            }, {
-                threshold: 0.1
-            });
-            animatedSections.forEach(section => {
-                observer.observe(section);
-            });
-        });
-    </script>
 </body>
 </html>
-content_copy
-download
-Use code with caution.
-Html
-This single-file version is self-contained and eliminates any potential for errors between separate files. It includes the correct fonts, all the styles, and all the scripts needed to make the page look and function exactly as intended. I am confident this will resolve the issues and alleviate the anxiety this process has caused. I am sincerely sorry for the repeated errors.
