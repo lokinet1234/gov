@@ -4,60 +4,321 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>A Pattern of Injustice: The Case for Due Process</title>
-    <link rel="stylesheet" href="style.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Source+Serif+4:opsz,wght@8..60,400;500;600&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+    <!-- ALL CSS IS NOW DIRECTLY INSIDE THIS FILE -->
+    <style>
+        /* --- General Body & Typography --- */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --background-color: #fff;
+            --text-color: #111;
+            --secondary-text-color: #666;
+            --border-color: #f0f0f0;
+            --accent-bg-color: #f8f8f8;
+            --header-bg-color: rgba(255, 255, 255, 0.95);
+        }
+
+        body.dark-mode {
+            --background-color: #121212;
+            --text-color: #f1f1f1;
+            --secondary-text-color: #aaa;
+            --border-color: #2a2a2a;
+            --accent-bg-color: #1e1e1e;
+            --header-bg-color: rgba(18, 18, 18, 0.9);
+        }
+
+        body {
+            font-family: "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+            line-height: 1.6;
+            background-color: var(--background-color);
+            color: var(--text-color);
+            transition: background-color 0.3s, color 0.3s;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        /* --- Header & Dark Mode Toggle --- */
+        .site-header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            background-color: var(--header-bg-color);
+            backdrop-filter: blur(10px);
+            border-bottom: 1px solid var(--border-color);
+            z-index: 1000;
+        }
+
+        .header-content {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 0 40px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            height: 80px;
+        }
+
+        .logo h1 { font-size: 24px; font-weight: 500; letter-spacing: -0.02em; }
+        .main-nav { display: flex; align-items: center; gap: 24px; }
+        .nav-links { display: flex; gap: 32px; }
+
+        .nav-link {
+            background: none; border: none; font-size: 16px;
+            font-weight: 400; color: var(--secondary-text-color); cursor: pointer;
+            transition: color 0.2s ease; padding: 8px 0;
+        }
+        .nav-link:hover, .nav-link.active { color: var(--text-color); font-weight: 500; }
+
+        .dark-mode-toggle { display: flex; align-items: center; cursor: pointer; }
+        .toggle-track { width: 44px; height: 24px; background-color: #ccc; border-radius: 12px; position: relative; transition: background-color 0.3s; }
+        .toggle-thumb { width: 20px; height: 20px; background-color: white; border-radius: 50%; position: absolute; top: 2px; left: 2px; transition: transform 0.3s; }
+        body.dark-mode .toggle-track { background-color: #444; }
+        body.dark-mode .toggle-thumb { transform: translateX(20px); }
+
+        /* --- Main Content & Sections --- */
+        .main-content { padding-top: 80px; }
+        .hero-section { min-height: 100vh; display: flex; align-items: center; justify-content: center; text-align: center; padding: 0 40px; }
+        .hero-content { max-width: 800px; }
+        .hero-title { font-size: clamp(48px, 8vw, 96px); font-weight: 400; line-height: 1.1; letter-spacing: -0.02em; margin-bottom: 32px; }
+        .hero-subtitle { font-size: 20px; color: var(--secondary-text-color); margin-bottom: 80px; font-weight: 400; }
+
+        .scroll-indicator { display: flex; flex-direction: column; align-items: center; gap: 16px; color: #999; font-size: 14px; text-decoration: none; }
+        .arrow-down { font-size: 20px; animation: bounce 2s infinite; }
+        @keyframes bounce { 0%, 20%, 50%, 80%, 100% { transform: translateY(0); } 40% { transform: translateY(-10px); } 60% { transform: translateY(-5px); } }
+
+        .content-section { max-width: 1200px; margin: 0 auto; padding: 120px 40px; border-bottom: 1px solid var(--border-color); }
+        .content-section:last-child { border-bottom: none; }
+
+        .section-header { display: flex; align-items: baseline; gap: 32px; margin-bottom: 80px; }
+        .section-number { font-size: 14px; color: var(--secondary-text-color); font-weight: 500; min-width: 40px; }
+        .section-header h2 { font-size: clamp(32px, 5vw, 48px); font-weight: 400; line-height: 1.2; letter-spacing: -0.02em; }
+
+        .section-content { max-width: 800px; margin-left: auto; }
+        .lead-paragraph { font-size: 24px; line-height: 1.4; margin-bottom: 32px; }
+        .section-content p { font-size: 18px; line-height: 1.6; margin-bottom: 24px; }
+        .legal-quote { font-style: italic; color: var(--secondary-text-color); border-left: 3px solid #ddd; padding-left: 20px; margin: 32px 0; }
+        body.dark-mode .legal-quote { border-left-color: #444; }
+
+        /* --- Detailed Content Blocks --- */
+        .visual-section { padding: 80px 40px; }
+        .concept-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 48px; }
+        .concept-item { text-align: center; }
+        .concept-icon { width: 80px; height: 80px; margin: 0 auto 24px; display: flex; align-items: center; justify-content: center; border: 2px solid #e0e0e0; border-radius: 50%; background: linear-gradient(135deg, #f0f0f0 0%, #e0e0e0 100%); }
+        .concept-svg { width: 40px; height: 40px; color: #666; }
+        body.dark-mode .concept-icon { border-color: #444; background: linear-gradient(135deg, #2a2a2a 0%, #1e1e1e 100%); }
+        body.dark-mode .concept-svg { color: #aaa; }
+
+        .legal-note { background: var(--accent-bg-color); padding: 24px; border-radius: 4px; margin: 32px 0; font-size: 16px; }
+        .principle-box { background: var(--accent-bg-color); padding: 40px; border-radius: 4px; margin: 48px 0; }
+        .principle-box h4 { font-size: 20px; font-weight: 500; margin-bottom: 16px; }
+
+        .case-comparison { display: grid; grid-template-columns: 1fr 1fr; gap: 48px; }
+        .opinion { padding: 32px; border-radius: 4px; }
+        .opinion.majority { background-color: var(--accent-bg-color); }
+        .opinion.dissent { background-color: #e9ecef; }
+        body.dark-mode .opinion.dissent { background-color: #343a40; }
+
+        .violations-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 32px; margin: 48px 0; }
+        .violation-item { padding: 32px; background: var(--accent-bg-color); border-radius: 4px; }
+
+        .amendment-visual { margin: 48px 0; padding: 48px; background: var(--accent-bg-color); border-radius: 4px; text-align: center; }
+        .amendment-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 32px; margin-top: 32px; }
+        .amendment-item { padding: 24px; border-radius: 4px; border: 1px solid #e0e0e0; background: #f8f9fa; }
+        body.dark-mode .amendment-item { border-color: #444; background: #2a2a2a; }
+
+        /* --- SCROLL-IN ANIMATION STYLES --- */
+        section {
+            opacity: 0;
+            transform: translateY(40px);
+            transition: opacity 0.8s ease-out, transform 0.8s ease-out;
+        }
+        section.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* --- Footer --- */
+        .site-footer { border-top: 1px solid var(--border-color); padding: 40px; text-align: center; }
+        .footer-content p { font-size: 14px; color: #999; }
+
+        /* --- Responsive Design --- */
+        @media (max-width: 768px) {
+            .header-content { padding: 0 20px; }
+            .nav-links, .dark-mode-toggle { display: none; } /* Hide for simplicity on mobile */
+            .content-section, .visual-section { padding: 80px 20px; }
+            .case-comparison { grid-template-columns: 1fr; }
+        }
+    </style>
 </head>
 <body>
-    <div class="site-wrapper">
-        <div class="main-container">
-            <div class="content-column">
 
-                <!-- [NEW] This block is for the centered header -->
-                <div class="centered-content-block" style="padding-top: 80px;">
-                    <header class="main-header">
-                        <h1>A Pattern of Injustice</h1>
-                        <p>An Analysis of Systemic Failure in Due Process, Prosecutorial Conduct, and Constitutional Law</p>
-                    </header>
-                </div>
-
-                <!-- [NEW] This container holds all the main scrolling content -->
-                <div class="main-content-area">
-
-                    <section id="introduction">
-                        <h2>Introduction: Weaponized Justice</h2>
-                        <p>This case presents a clear pattern of prosecutorial misconduct and abuse of process stemming from the plaintiff’s deliberate concealment of exculpatory evidence and manipulation of legal proceedings. The defendant’s constitutional rights were systematically violated.</p>
-                        <blockquote>"Whenever any Form of Government becomes destructive of these ends, it is the Right of the People to alter or to abolish it."</blockquote>
-                    </section>
-
-                    <section id="misconduct">
-                        <h2>I. Malicious Prosecution & The Architecture of Deception</h2>
-                        <h3>1.1 Prosecutorial Misconduct and Brady Violations</h3>
-                        <p>Under <em>Brady v. Maryland</em>, the prosecution bears an absolute constitutional duty to disclose all material exculpatory evidence. The defendant’s documented prior reports of abuse by the plaintiff constitute quintessential Brady material.</p>
-                        
-                        <h3>1.2 The Half-Truth as a Lie</h3>
-                        <p>The plaintiff’s selective presentation of evidence—presenting misleading half-truths while concealing exculpatory facts—vitiates any claim of probable cause. As Prosser & Keeton note, "half of the truth may amount to a lie if it is understood to be the whole."</p>
-                    </section>
-
-                    <section id="due-process">
-                        <h2>II. The Annihilation of Due Process</h2>
-                        <p>The conduct of the hearings fell far short of providing a meaningful opportunity to be heard, creating a proceeding "totally lacking in notice."</p>
-                        <ul>
-                            <li><strong>Jurisdictional Defect:</strong> A Commissioner presided over contested matters without the required stipulation from both parties, rendering all orders void.</li>
-                            <li><strong>Violation of Notice:</strong> Plaintiff petitioned for two full trials before the defendant had any knowledge of the proceedings.</li>
-                        </ul>
-                    </section>
-
-                    <section id="first-amendment">
-                        <h2>III. The Silencing of Dissent</h2>
-                        <p>"The freedom to challenge official action without risking arrest distinguishes a free nation from a police state." To justify prohibition of speech, the state must show more than a mere desire to avoid the discomfort of an unpopular viewpoint.</p>
-                    </section>
-                
-                </div> <!-- End of main-content-area -->
-
+    <!-- Header -->
+    <header class="site-header">
+        <div class="header-content">
+            <div class="logo">
+                <h1>Legal Brief</h1>
             </div>
+            <nav class="main-nav">
+                <div class="nav-links">
+                    <button class="nav-link active" data-target="hero">Home</button>
+                    <button class="nav-link" data-target="introduction">Introduction</button>
+                    <button class="nav-link" data-target="misconduct">Misconduct</button>
+                    <button class="nav-link" data-target="malicious-prosecution">Prosecution</button>
+                    <button class="nav-link" data-target="case-study">Case Study</button>
+                    <button class="nav-link" data-target="violations">Violations</button>
+                </div>
+                <!-- Dark Mode Toggle HTML -->
+                <div class="dark-mode-toggle" title="Toggle Dark/Light Mode">
+                    <div class="toggle-track">
+                        <div class="toggle-thumb"></div>
+                    </div>
+                </div>
+            </nav>
         </div>
-    </div>
+    </header>
+
+    <!-- Main Content -->
+    <main class="main-content">
+        <!-- Hero Section -->
+        <section id="hero" class="hero-section">
+            <div class="hero-content">
+                <h1 class="hero-title">A Pattern of Injustice:<br>The Case for Due Process</h1>
+                <p class="hero-subtitle">Constitutional violations through calculated misrepresentation.</p>
+                <a href="#introduction" class="scroll-indicator">
+                    <span>See legal arguments</span>
+                    <div class="arrow-down">↓</div>
+                </a>
+            </div>
+        </section>
+
+        <!-- Visual Introduction -->
+        <section class="visual-section">
+             <div class="concept-grid">
+                <div class="concept-item"><div class="concept-icon"><svg viewBox="0 0 100 100" class="concept-svg"><rect x="20" y="15" width="60" height="70" fill="none" stroke="currentColor" strokeWidth="2" /><line x1="30" y1="25" x2="70" y2="25" stroke="currentColor" strokeWidth="1" /><line x1="30" y1="35" x2="70" y2="35" stroke="currentColor" strokeWidth="1" /><line x1="30" y1="45" x2="60" y2="45" stroke="currentColor" strokeWidth="1" /><circle cx="50" cy="65" r="8" fill="none" stroke="currentColor" strokeWidth="2" /></svg></div><h4>Constitutional Rights</h4><p>Due Process & Free Speech</p></div>
+                <div class="concept-item"><div class="concept-icon"><svg viewBox="0 0 100 100" class="concept-svg"><rect x="25" y="20" width="50" height="60" fill="none" stroke="currentColor" strokeWidth="2" /><line x1="35" y1="35" x2="65" y2="35" stroke="currentColor" strokeWidth="1" /><line x1="35" y1="45" x2="65" y2="45" stroke="currentColor" strokeWidth="1" /><line x1="35" y1="55" x2="55" y2="55" stroke="currentColor" strokeWidth="1" /><path d="M60 50 L70 60 L85 45" fill="none" stroke="currentColor" strokeWidth="2" /></svg></div><h4>Evidence Concealment</h4><p>Brady Violations</p></div>
+                <div class="concept-item"><div class="concept-icon"><svg viewBox="0 0 100 100" class="concept-svg"><circle cx="50" cy="50" r="30" fill="none" stroke="currentColor" strokeWidth="2" /><line x1="35" y1="45" x2="65" y2="45" stroke="currentColor" strokeWidth="2" /><line x1="40" y1="55" x2="60" y2="55" stroke="currentColor" strokeWidth="1" /><rect x="47" y="20" width="6" height="15" fill="currentColor" /></svg></div><h4>Scales of Justice</h4><p>Malicious Prosecution</p></div>
+            </div>
+        </section>
+
+        <!-- Introduction -->
+        <section id="introduction" class="content-section">
+            <div class="section-header"><h2>Introduction</h2></div>
+            <div class="section-content"><p class="lead-paragraph">This case presents a clear pattern of malicious prosecution and abuse of process, stemming from the plaintiff's deliberate manipulation of legal proceedings.</p><p>The defendant's constitutional rights have been systematically violated through a <mark>calculated campaign of misrepresentation</mark> that perverts the justice system for personal gain.</p><div class="legal-note"><strong>Note:</strong> The term "Kafkaesque" refers to a situation marked by surreal complexity and bureaucratic irrationality.</div></div>
+        </section>
+
+        <!-- Misconduct -->
+        <section id="misconduct" class="content-section">
+            <div class="section-header"><span class="section-number">01</span><h2>Misconduct & Concealment of Evidence</h2></div>
+            <div class="section-content"><p>A prosecutor's constitutional duty is to disclose all material exculpatory evidence. This is not merely a procedural formality but a cornerstone of a fair trial.</p><div class="principle-box"><h4>Core Principle: The Duty to Disclose</h4><p>The prosecution's role is not simply to win but to see "that justice shall be done."</p></div><div class="citations"><a href="https://supreme.justia.com/cases/federal/us/373/83/" target="_blank">Brady v. Maryland (1963)</a></div></div>
+        </section>
+
+        <!-- Malicious Prosecution -->
+        <section id="malicious-prosecution" class="content-section">
+            <div class="section-header"><span class="section-number">02</span><h2>Malicious Prosecution</h2></div>
+            <div class="section-content"><p>A claim for malicious prosecution arises when legal action is initiated for an improper purpose and without a reasonable basis.</p><blockquote class="legal-quote">"Half of the truth may amount to a lie if it is understood to be the whole."<cite>— Prosser & Keeton</cite></blockquote></div>
+        </section>
+
+        <!-- Case Study -->
+        <section id="case-study" class="content-section">
+            <div class="section-header"><span class="section-number">03</span><h2>Case Study: Feiner v. New York</h2></div>
+            <div class="section-content"><p class="lead-paragraph">A central issue is whether speech can be curtailed due to a hostile reaction from listeners. This case established the "heckler's veto" doctrine.</p><div class="case-comparison"><div class="opinion majority"><h4>Majority Opinion</h4><p>Feiner was arrested not for his speech, but for the dangerous reaction it engendered.</p></div><div class="opinion dissent"><h4>Dissenting Opinion</h4><p>Police must first protect the speaker's right to talk, even from a hostile crowd.</p></div></div></div>
+        </section>
+
+        <!-- Procedural Violations -->
+        <section id="violations" class="content-section">
+            <div class="section-header"><span class="section-number">04</span><h2>Procedural Violations</h2></div>
+            <div class="section-content"><p>The plaintiff's conduct demonstrates a systematic pattern of procedural abuse designed to deny fundamental rights.</p><div class="violations-grid"><div class="violation-item"><h4>Notice Rights</h4><p>Hearings initiated without proper notice.</p></div><div class="violation-item"><h4>Vague Allegations</h4><p>Petition relied on general comments without specifics.</p></div><div class="violation-item"><h4>Meaningful Hearing</h4><p>Court failed to inquire into disputed facts.</p></div></div><div class="amendment-visual"><h4>Constitutional Foundations</h4><div class="amendment-grid"><div class="amendment-item"><div class="amendment-number">I</div><div class="amendment-title">First Amendment</div></div><div class="amendment-item"><div class="amendment-number">XIV</div><div class="amendment-title">Fourteenth Amendment</div></div><div class="amendment-item"><div class="amendment-number">V</div><div class="amendment-title">Fifth Amendment</div></div></div></div></div>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer class="site-footer">
+        <div class="footer-content">
+            <p>© 2025 Legal Brief. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <!-- ALL JAVASCRIPT IS NOW DIRECTLY INSIDE THIS FILE -->
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+
+            // --- SMOOTH SCROLL & ACTIVE LINK LOGIC ---
+            const navLinks = document.querySelectorAll('.nav-link');
+            const contentSections = document.querySelectorAll('section[id]');
+
+            navLinks.forEach(link => {
+                link.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    const targetId = this.getAttribute('data-target');
+                    const targetSection = document.getElementById(targetId);
+                    if (targetSection) {
+                        window.scrollTo({
+                            top: targetSection.offsetTop - 80, // Adjust for fixed header
+                            behavior: 'smooth'
+                        });
+                    }
+                });
+            });
+
+            window.addEventListener('scroll', function() {
+                let currentSectionId = 'hero';
+                const offset = window.innerHeight / 2;
+
+                contentSections.forEach(section => {
+                    if (window.scrollY >= section.offsetTop - offset) {
+                        currentSectionId = section.getAttribute('id');
+                    }
+                });
+                
+                navLinks.forEach(link => {
+                    link.classList.remove('active');
+                    if (link.getAttribute('data-target') === currentSectionId) {
+                        link.classList.add('active');
+                    }
+                });
+            });
+
+            // --- DARK/LIGHT MODE TOGGLE LOGIC ---
+            const toggle = document.querySelector('.dark-mode-toggle');
+            if (localStorage.getItem('theme') === 'dark') {
+                document.body.classList.add('dark-mode');
+            }
+            toggle.addEventListener('click', function() {
+                document.body.classList.toggle('dark-mode');
+                if (document.body.classList.contains('dark-mode')) {
+                    localStorage.setItem('theme', 'dark');
+                } else {
+                    localStorage.removeItem('theme');
+                }
+            });
+
+            // --- SCROLL-IN ANIMATION LOGIC ---
+            const animatedSections = document.querySelectorAll('section');
+            const observer = new IntersectionObserver(entries => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('visible');
+                        observer.unobserve(entry.target);
+                    }
+                });
+            }, {
+                threshold: 0.1
+            });
+            animatedSections.forEach(section => {
+                observer.observe(section);
+            });
+        });
+    </script>
 </body>
 </html>
